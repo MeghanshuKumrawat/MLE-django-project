@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}model_obj
+{% block content %}
+{% include 'navbar.html' %}
+<main class="container">
+    <div class="d-flex align-items-center p-3 my-3 text-white bg-purple rounded shadow-sm">
+        <img class="me-3" src="https://img.favpng.com/19/0/20/machine-learning-deep-learning-with-python-artificial-intelligence-png-favpng-qFCv7GVnQNDpErJCX6ukpSHLw.jpg" alt="" width="48" height="38">
+        <div class="lh-1">
+            <h1 class="h6 mb-0 text-white lh-1">{{ algorithm.name }}</h1>
+            <small>{{ algorithm.description }}</small>
+        </div>
+    </div>
+    {% include 'alert.html' %}
+
+    {% if flag == "TITLE" %}
+    <div class="my-3 p-3 bg-body rounded shadow-sm">
+        <h6 class="border-bottom pb-2 mb-0">Project details</h6>
+        <form class="mx-5 m-2" method="post">{% csrf_token %}
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Project title</label>
+                <input type="text" class="form-control" id="exampleFormControlInput1" name="title" value="{{ model_obj.title }}">
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlTextarea1" class="form-label">Project description</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description">{{ model_obj.description }}</textarea>
+            </div>
+            <small class="d-block text-end mt-2">
+                <button class="btn btn-primary" type="submit" name="title-form">Upload dataset</button>
+            </small>
+        </form>
+    </div>
+    {% elif flag == "UPLOAD" %}
+    <div class="my-3 p-3 bg-body rounded shadow-sm">
+        <h6 class="border-bottom pb-2 mb-0">Upload Dataset</h6>
+        <form class="mx-5 m-2" method="post" enctype="multipart/form-data">{% csrf_token %}
+            <div class="mb-3">
+                <Label>{{ model_obj.data_file }}</Label>
+                <input type="file" name="data_file" value="{{ model_obj.data_file }}" class="form-control" id="formFile">
+            </div>
+            <small class="d-block text-end mt-2">
+                <button class="btn btn-primary" type="submit" name="upload-form">Select Y variable</button>
+            </small>
+        </form>
+    </div>
+    {% elif flag == "SELECT" %}
+    <div class="my-3 p-3 bg-body rounded shadow-sm">
+        <h6 class="border-bottom pb-2 mb-0">Select Target Column</h6>
+        <form class="my-5 m-5" method="post">{% csrf_token %}
+            <div class="mb-5">
+                <select name="target" class="form-select" aria-label="Default select example">
+                    <option {% if model_obj.target %}selected{% endif %}>Open this select target column</option>
+                    {% for col in data_columns %}
+                    <option {% if model_obj.target %}selected{% endif %} value="{{ col }}">{{ col }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <small class="d-block text-end mt-2">
+                <button class="btn btn-primary" type="submit" name="training-form">Save</button>
+            </small>
+        </form>
+    </div>
+    {% else %}
+    <div class="my-3 p-3 bg-body rounded shadow-sm">
+        <h4 class="text-center">Something went wrong!</h4>
+    </div>
+    {% endif %}
+</main>
+{% endblock content %}

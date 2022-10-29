@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% include 'navbar.html' %}
+
+<main class="container">
+  <div class="d-flex align-items-center p-3 my-3 text-white bg-purple rounded shadow-sm">
+    <img class="me-3"
+      src="https://img.favpng.com/19/0/20/machine-learning-deep-learning-with-python-artificial-intelligence-png-favpng-qFCv7GVnQNDpErJCX6ukpSHLw.jpg"
+      alt="" width="48" height="38">
+    <div class="lh-1">
+      <h1 class="h6 mb-0 text-white lh-1">{{ model.title}}</h1>
+      <small>{{ model.description }}</small>
+    </div>
+  </div>
+  {% include 'alert.html' %}
+
+  <div id="Supervised" , style="height: 50px;"></div>
+  <div class="my-3 p-3 bg-body rounded shadow-sm">
+    <h2 class="border-bottom pb-2 mb-0 text-center">Make a prediction....</h2>
+    <form class="m-5" method="post" enctype="multipart/form-data">{% csrf_token %}
+      <input type="hidden" name="obj" value="{{ obj.id }}">
+      <div class="mb-3">
+        <input type="file" name="test_file" class="form-control" id="formFile">
+      </div>
+      <small class="d-block text-end mt-2">
+        <button class="btn btn-primary" type="submit" name="upload-form">Get prediction</button>
+      </small>
+    </form>
+    </a>
+  </div>
+  <div class="my-3 p-3 bg-body rounded shadow-sm">
+    <h6 class="border-bottom pb-2 mb-0">Point to consider :</h6>
+    <ul class="mt-2">
+        <li>Upload a test dataset file to get the prediction.</li>
+        <li>Currently, it only accepts <b>CSV</b> files.</li>
+    </ul>
+</div>
+</main>
+
+{% endblock content %}

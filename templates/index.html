@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% include 'navbar.html' %}
+
+<div class="nav-scroller bg-body shadow-sm">
+  <nav class="nav" aria-label="Secondary navigation">
+    <a class="nav-link active" aria-current="page" href="#">Dashboard</a>
+    <a class="nav-link" href="#Supervised">Supervised</a>
+    <a class="nav-link" href="#Unsupervised">Unsupervised</a>
+    <a class="nav-link" href="#Reinforcement">Reinforcement</a>
+  </nav>
+</div>
+
+<main class="container">
+  <div class="d-flex align-items-center p-3 my-3 text-white bg-purple rounded shadow-sm">
+    <img class="me-3"
+    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYx1F7m3uK23IOXaFU7Qrzk2yJSjMHzfy31Q&usqp=CAU" alt=""
+    width="48" height="38">
+    <div class="lh-1">
+      <h1 class="h6 mb-0 text-white lh-1">Revca Web Dev Assignment 1</h1>
+      <small>(MLE with Django)</small>
+    </div>
+  </div>
+  {% include 'alert.html' %}
+  <div id="Supervised" , style="height: 50px;"></div>
+  <div class="my-3 p-3 bg-body rounded shadow-sm">
+    <h6 class="border-bottom pb-2 mb-0">Supervised Learning</h6>
+    {% for algo in algorithms %}
+    {% if algo.algo_type == "SL" %}
+    <a href="{% url 'sl-dataset' algo.id %}" class="nav-link ">
+      <div class="d-flex text-muted pt-3">
+        <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32"
+          xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32"
+          preserveAspectRatio="xMidYMid slice" focusable="false">
+          <title>Placeholder</title>
+          <rect width="100%" height="100%" fill="#007bff" /><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text>
+        </svg>
+
+        <p class="pb-3 mb-0 small lh-sm border-bottom">
+          <strong class="d-block text-gray-dark">{{ algo.name}}</strong>
+          {{ algo.description }}
+        </p>
+      </div>
+    </a>
+    {% endif %}
+    {% endfor %}
+  </div>
+  <div id="Unsupervised" , style="height: 50px;"></div>
+  <div class="my-3 p-3 bg-body rounded shadow-sm">
+    <h6 class="border-bottom pb-2 mb-0">Unsupervised Learning</h6>
+    {% for algo in algorithms %}
+    {% if algo.algo_type == "UL" %}
+    <a href="" class="nav-link ">
+      <div class="d-flex text-muted pt-3">
+        <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32"
+          xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32"
+          preserveAspectRatio="xMidYMid slice" focusable="false">
+          <title>Placeholder</title>
+          <rect width="100%" height="100%" fill="#e83e8c" /><text x="50%" y="50%" fill="#e83e8c" dy=".3em">32x32</text>
+        </svg>
+
+        <p class="pb-3 mb-0 small lh-sm border-bottom">
+          <strong class="d-block text-gray-dark">{{ algo.name}}</strong>
+          {{ algo.description }}
+        </p>
+      </div>
+    </a>
+    {% endif %}
+    {% endfor %}
+  </div>
+  <div id="Reinforcement" , style="height: 50px;"></div>
+  <div class="my-3 p-3 bg-body rounded shadow-sm">
+    <h6 class="border-bottom pb-2 mb-0">Reinforcement Learning</h6>
+    {% for algo in algorithms %}
+    {% if algo.algo_type == "RL" %}
+    <a href="" class="nav-link ">
+      <div class="d-flex text-muted pt-3">
+        <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32"
+          xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32"
+          preserveAspectRatio="xMidYMid slice" focusable="false">
+          <title>Placeholder</title>
+          <rect width="100%" height="100%" fill="#6f42c1" /><text x="50%" y="50%" fill="#6f42c1" dy=".3em">32x32</text>
+        </svg>
+
+        <p class="pb-3 mb-0 small lh-sm border-bottom">
+          <strong class="d-block text-gray-dark">{{ algo.name}}</strong>
+          {{ algo.description }}
+        </p>
+      </div>
+    </a>
+    {% endif %}
+    {% endfor %}
+  </div>
+</main>
+{% endblock content %}
